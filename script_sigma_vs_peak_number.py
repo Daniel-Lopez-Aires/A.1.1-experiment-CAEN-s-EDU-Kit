@@ -27,7 +27,7 @@ import sys                   #to import functions from other folders!!
 sys.path.insert(0, '/home/dla/Python/Functions_homemade')   #path where I have the functions
 
 import Gaussian_fit
-import RegresionLineal
+import Linear_regression
 
 ######3
 
@@ -322,10 +322,10 @@ def linear(x, m, n):       #Definition of the function to use to fit the data
     return m * x + n 
 
 
-ajuste = RegresionLineal.RegresionLineal(N, sigma_stored)
+ajuste = Linear_regression.LinearRegression(N, sigma_stored)
             #the results are the same as in my script, so awesome
             
-ajuste2 = RegresionLineal.RegresionLineal(N, sigma2_stored)            
+ajuste2 = Linear_regression.LinearRegression(N, sigma2_stored)            
 
 #Sigma plot with fit
 
@@ -379,7 +379,11 @@ plt.ylim(0,7000)
 plt.savefig('sigma2_vs_peaknumber_CAENs_style_py.png', format='png')
 
 
-#%% NEW, TRY TO FIT VARIANCE TO A PARABOLE (X^2)
+
+
+#%% 
+
+########################4)Square fit to variance##########################
 
 #the fashion to do the fit is the usual, define the funciton, and then fit:
     
