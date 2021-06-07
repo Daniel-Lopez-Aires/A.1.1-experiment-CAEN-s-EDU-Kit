@@ -136,6 +136,116 @@ with open('800mV_tapa_histo.txt') as file_object:
         for i in range(len(lines)):            
             ADC_channel_800mV.append(float(lines[i].split()[0])) 
             counts_800mV.append(float(lines[i].split()[1]))
+            
+         ####   
+#Data loading with amplitude set to 0 (before was unplugged)
+         ####
+         
+         
+with open('0mV_histo.txt') as file_object:           
+        
+    lines = file_object.readlines()
+    print('the number of lines of the 0mV file is',len(lines))
+        
+    ADC_channel_0mV_led = []
+    counts_0mV_led = []
+    for i in range(len(lines)):            
+        ADC_channel_0mV_led.append(float(lines[i].split()[0])) 
+        counts_0mV_led.append(float(lines[i].split()[1]))
+            
+        
+with open('100mV_histo.txt') as file_object:   
+    
+    lines = file_object.readlines()
+    print('the number of lines of the 100mV file is',len(lines))
+        
+    ADC_channel_100mV_led = []
+    counts_100mV_led = []
+    for i in range(len(lines)):            
+        ADC_channel_100mV_led.append(float(lines[i].split()[0])) 
+        counts_100mV_led.append(float(lines[i].split()[1]))
+
+with open('200mV_histo.txt') as file_object:    #file_object stores
+            # the object representing the file (pi.txt), which is opened with
+            #the open function                  
+                 
+        lines = file_object.readlines()
+        print('the number of lines of the 200mV file is',len(lines))
+        #This contains strings (have to be converted to numbers using int()
+        #and \n, so the \n (salto de linea) have to be removed
+        
+        ADC_channel_200mV_led = []
+        counts_200mV_led = []
+        for i in range(len(lines)):            
+            ADC_channel_200mV_led.append(float(lines[i].split()[0]))  #store 1st number of the
+                            #column
+            counts_200mV_led.append(float(lines[i].split()[1]))     #store 2nd number of the
+                            #column          
+with open('300mV_histo.txt') as file_object:                  
+                 
+        lines = file_object.readlines()
+        print('the number of lines of the 300mV file is',len(lines))
+        
+        ADC_channel_300mV_led = []
+        counts_300mV_led = []
+        for i in range(len(lines)):            
+            ADC_channel_300mV_led.append(float(lines[i].split()[0])) 
+            counts_300mV_led.append(float(lines[i].split()[1]))
+            
+with open('400mV_histo.txt') as file_object:                  
+                 
+        lines = file_object.readlines()
+        print('the number of lines of the 400mV file is',len(lines))
+        
+        ADC_channel_400mV_led = []
+        counts_400mV_led = []
+        for i in range(len(lines)):            
+            ADC_channel_400mV_led.append(float(lines[i].split()[0])) 
+            counts_400mV_led.append(float(lines[i].split()[1]))
+
+with open('500mV_histo.txt') as file_object:                
+                 
+        lines = file_object.readlines()
+        print('the number of lines of the 500mV file is',len(lines))
+        
+        ADC_channel_500mV_led = []
+        counts_500mV_led = []
+        for i in range(len(lines)):            
+            ADC_channel_500mV_led.append(float(lines[i].split()[0])) 
+            counts_500mV_led.append(float(lines[i].split()[1]))
+
+with open('600mV_histo.txt') as file_object:              
+                 
+        lines = file_object.readlines()
+        print('the number of lines of the 600mV file is',len(lines))
+        
+        ADC_channel_600mV_led = []
+        counts_600mV_led = []
+        for i in range(len(lines)):            
+            ADC_channel_600mV_led.append(float(lines[i].split()[0])) 
+            counts_600mV_led.append(float(lines[i].split()[1]))
+
+with open('700mV_histo.txt') as file_object:                 
+                 
+        lines = file_object.readlines()
+        print('the number of lines of the 700mV file is',len(lines))
+        
+        ADC_channel_700mV_led = []
+        counts_700mV_led = []
+        for i in range(len(lines)):            
+            ADC_channel_700mV_led.append(float(lines[i].split()[0])) 
+            counts_700mV_led.append(float(lines[i].split()[1]))
+
+with open('800mV_histo.txt') as file_object:                  
+                 
+        lines = file_object.readlines()
+        print('the number of lines of the 800mV file is',len(lines))
+        
+        ADC_channel_800mV_led = []
+        counts_800mV_led = []
+        for i in range(len(lines)):            
+            ADC_channel_800mV_led.append(float(lines[i].split()[0])) 
+            counts_800mV_led.append(float(lines[i].split()[1]))
 #%%
 
 
@@ -144,6 +254,12 @@ total_counts = [sum(counts_0mV), sum(counts_100mV), sum(counts_200mV),
                 sum(counts_300mV), sum(counts_400mV), sum(counts_500mV),
                 sum(counts_600mV), sum(counts_700mV), sum(counts_800mV)]
 total_count_rate = [value /30 for value in total_counts]
+
+total_counts_led = [sum(counts_0mV_led), sum(counts_100mV_led), sum(counts_200mV_led), 
+                sum(counts_300mV_led), sum(counts_400mV_led), sum(counts_500mV_led),
+                sum(counts_600mV_led), sum(counts_700mV_led), sum(counts_800mV_led)]
+total_count_rate_led = [value /30 for value in total_counts_led]    #with the led driver connected
+
 thresholds = [0, 100, 200, 300, 400, 500, 600, 700, 800]
 
 #%%
@@ -155,17 +271,30 @@ import matplotlib.pyplot as plt  #for simplicity, to not write matplotlib.pyplot
         #everytime we want to plot something
         
 plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
-plt.bar(thresholds,total_count_rate, width = 10.0)
+plt.bar(thresholds,total_count_rate, width = thresholds[1]-thresholds[0], edgecolor="black")
 
 # Set chart title and label axes.
-plt.title("Dark counts rate vs Threshold, no Led driver", fontsize=20)   #title
-plt.xlabel("Threshold (mV)", fontsize=10)                        #xlabel
-plt.ylabel("Count rate (Hz)", fontsize=10)              #ylabel
+plt.title("Dark counts rate vs Threshold, no LED driver", fontsize=22)   #title
+plt.xlabel("Threshold (mV)", fontsize=14)                        #xlabel
+plt.ylabel("Count rate (Hz)", fontsize=14)              #ylabel
 # Set size of tick labels.
-plt.tick_params(axis='both', labelsize=10)              #size of axis
+plt.tick_params(axis='both', labelsize=14)              #size of axis
 plt.grid(True)                                              #show grid
 #plt.yscale('log')                                          #y axis in log scale
 plt.savefig('Dark_counts_vs_threshold_SiPM_no_led.png', format='png')
+
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
+plt.bar(thresholds,total_count_rate_led, width = thresholds[1]-thresholds[0], edgecolor="black")
+
+# Set chart title and label axes.
+plt.title("Dark counts rate vs Threshold, LED driver = 0", fontsize=22)   #title
+plt.xlabel("Threshold (mV)", fontsize=14)                        #xlabel
+plt.ylabel("Count rate (Hz)", fontsize=14)              #ylabel
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True)                                              #show grid
+#plt.yscale('log')                                          #y axis in log scale
+plt.savefig('Dark_counts_vs_threshold_SiPM_led.png', format='png')
 
 
 #%%
