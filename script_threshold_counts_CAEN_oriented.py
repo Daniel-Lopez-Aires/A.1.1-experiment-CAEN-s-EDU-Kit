@@ -14,7 +14,6 @@ sys.path.insert(0, '/home/dla/Python/Functions_homemade')   #path where I have t
 
 import numpy as np
 import Read_hist_txt
-import Gaussian_fit
 
 #   %reset                                      #to delete all the variables
 
@@ -27,103 +26,85 @@ import Gaussian_fit
 #extrange results, so will now unplug it, and closing the SiPM to see if now 
 #the results are fine.
 
+counts_stored = np.array([])                          #storing variable of the counts
+rate_stored = np.array([])                          #storing variable of the count rate
+ADC_channel = np.array([])                          #to store the channels
+
+time = np.array([30,30,30,30,30,30,30])              #[s] duration time od the measurements
+                #600, 200, 200
 
 
-with open('0_mV_55V_32dB_200_72ns_Led_0_histo.txt') as file_object:            
+####0 mV##
+load = Read_hist_txt.Read_hist_txt_CAEN('0_mV_55V_32dB_200_72ns_Led_0_histo.txt', time[0])  
+                               
+#Storing of the values
+ADC_channel = np.append(ADC_channel,load[0])
+counts_stored = np.append(counts_stored,load[1])
+rate_stored = np.append(rate_stored,load[2])
+   
+####10 mV##
+load = Read_hist_txt.Read_hist_txt_CAEN('10_mV_55V_32dB_200_72ns_Led_0_histo.txt', time[0])  
+                               
+#Storing of the values (the 2nd storing and more has to be columns stack!!)
+ADC_channel = np.column_stack((ADC_channel,load[0]))
+counts_stored = np.column_stack((counts_stored,load[1]))
+rate_stored = np.column_stack((rate_stored,load[2]))    
         
-    lines = file_object.readlines()
-    print('the number of lines of the 0mV file is',len(lines))
-        
-    ADC_channel_0mV = []
-    counts_0mV = []
-    for i in range(len(lines)):            
-        ADC_channel_0mV.append(float(lines[i].split()[0])) 
-        counts_0mV.append(float(lines[i].split()[1]))
-            
-        
-with open('10_mV_55V_32dB_200_72ns_Led_0_histo.txt') as file_object:        
-    
-    lines = file_object.readlines()
-    print('the number of lines of the 100mV file is',len(lines))
-        
-    ADC_channel_10mV = []
-    counts_10mV = []
-    for i in range(len(lines)):            
-        ADC_channel_10mV.append(float(lines[i].split()[0])) 
-        counts_10mV.append(float(lines[i].split()[1]))
+####20 mV##
+load = Read_hist_txt.Read_hist_txt_CAEN('20_mV_55V_32dB_200_72ns_Led_0_histo.txt', time[0])  
+                               
+#Storing of the values (the 2nd storing and more has to be columns stack!!)
+ADC_channel = np.column_stack((ADC_channel,load[0]))
+counts_stored = np.column_stack((counts_stored,load[1]))
+rate_stored = np.column_stack((rate_stored,load[2]))   
 
 
-with open('20_mV_55V_32dB_200_72ns_Led_0_histo.txt') as file_object:                      
-                 
-        lines = file_object.readlines()
-        print('the number of lines of the 20mV file is',len(lines))
-        #This contains strings (have to be converted to numbers using int()
-        #and \n, so the \n (salto de linea) have to be removed
-        
-        ADC_channel_20mV = []
-        counts_20mV = []
-        for i in range(len(lines)):            
-            ADC_channel_20mV.append(float(lines[i].split()[0]))  #store 1st number of the
-                            #column
-            counts_20mV.append(float(lines[i].split()[1]))     #store 2nd number of the
-                            #column          
+####30 mV##
+load = Read_hist_txt.Read_hist_txt_CAEN('30_mV_55V_32dB_200_72ns_Led_0_histo.txt', time[0])  
+                               
+#Storing of the values (the 2nd storing and more has to be columns stack!!)
+ADC_channel = np.column_stack((ADC_channel,load[0]))
+counts_stored = np.column_stack((counts_stored,load[1]))
+rate_stored = np.column_stack((rate_stored,load[2]))       
 
-with open('30_mV_55V_32dB_200_72ns_Led_0_histo.txt') as file_object:                     
-                 
-        lines = file_object.readlines()
-        print('the number of lines of the 30mV file is',len(lines))
-        
-        ADC_channel_30mV = []
-        counts_30mV = []
-        for i in range(len(lines)):            
-            ADC_channel_30mV.append(float(lines[i].split()[0])) 
-            counts_30mV.append(float(lines[i].split()[1]))
-            
-with open('40_mV_55V_32dB_200_72ns_Led_0_histo.txt') as file_object:                       
-                 
-        lines = file_object.readlines()
-        print('the number of lines of the 40mV file is',len(lines))
-        
-        ADC_channel_40mV = []
-        counts_40mV = []
-        for i in range(len(lines)):            
-            ADC_channel_40mV.append(float(lines[i].split()[0])) 
-            counts_40mV.append(float(lines[i].split()[1]))
 
-with open('50_mV_55V_32dB_200_72ns_Led_0_histo.txt') as file_object:                     
-                 
-        lines = file_object.readlines()
-        print('the number of lines of the 50mV file is',len(lines))
-        
-        ADC_channel_50mV = []
-        counts_50mV = []
-        for i in range(len(lines)):            
-            ADC_channel_50mV.append(float(lines[i].split()[0])) 
-            counts_50mV.append(float(lines[i].split()[1]))
+####40 mV##
+load = Read_hist_txt.Read_hist_txt_CAEN('40_mV_55V_32dB_200_72ns_Led_0_histo.txt', time[0])  
+                               
+#Storing of the values (the 2nd storing and more has to be columns stack!!)
+ADC_channel = np.column_stack((ADC_channel,load[0]))
+counts_stored = np.column_stack((counts_stored,load[1]))
+rate_stored = np.column_stack((rate_stored,load[2]))      
 
-with open('60_mV_55V_32dB_200_72ns_Led_0_histo.txt') as file_object:                     
-                 
-        lines = file_object.readlines()
-        print('the number of lines of the 60mV file is',len(lines))
-        
-        ADC_channel_60mV = []
-        counts_60mV = []
-        for i in range(len(lines)):            
-            ADC_channel_60mV.append(float(lines[i].split()[0])) 
-            counts_60mV.append(float(lines[i].split()[1]))
+
+####50 mV##
+load = Read_hist_txt.Read_hist_txt_CAEN('50_mV_55V_32dB_200_72ns_Led_0_histo.txt', time[0])  
+                               
+#Storing of the values (the 2nd storing and more has to be columns stack!!)
+ADC_channel = np.column_stack((ADC_channel,load[0]))
+counts_stored = np.column_stack((counts_stored,load[1]))
+rate_stored = np.column_stack((rate_stored,load[2]))     
+     
+       
+####60 mV##
+load = Read_hist_txt.Read_hist_txt_CAEN('60_mV_55V_32dB_200_72ns_Led_0_histo.txt', time[0])  
+                               
+#Storing of the values (the 2nd storing and more has to be columns stack!!)
+ADC_channel = np.column_stack((ADC_channel,load[0]))
+counts_stored = np.column_stack((counts_stored,load[1]))
+rate_stored = np.column_stack((rate_stored,load[2]))   
 
             
 #%%
 
 
 #############2) Calcs##########################
-total_counts = [sum(counts_0mV), sum(counts_10mV), sum(counts_20mV), 
-                sum(counts_30mV), sum(counts_40mV), sum(counts_50mV),
-                sum(counts_60mV)]
-total_count_rate = [value /30 for value in total_counts]
+total_counts = np.array( [sum(counts_stored[:,0]), sum(counts_stored[:,1]), sum(counts_stored[:,2]), 
+                sum(counts_stored[:,3]), sum(counts_stored[:,4]), sum(counts_stored[:,5]),
+                sum(counts_stored[:,6])] )
+total_count_rate = total_counts / time
 
-
-thresholds = [0, 10, 20, 30, 40, 50, 60]
+thresholds = np.array( [0, 10, 20, 30, 40, 50, 60] )        #thresholds values
 
 #%%
 
