@@ -50,9 +50,9 @@ with open('6_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
             
 
         
-plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
+plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
 plt.bar(ADC_channel_6ampl,counts_6ampl, width = ADC_channel_6ampl[1]-ADC_channel_6ampl[0])        
-plt.title("Spectra of the LED driver with amplitude 6", fontsize=22)           #title
+plt.title("Spectrum of the LED driver with amplitude 6", fontsize=22)           #title
 plt.xlabel("ADC channels", fontsize=14)                        #xlabel
 plt.ylabel("Counts", fontsize=14)              #ylabel
 # Set size of tick labels.
@@ -155,6 +155,19 @@ fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
 sigma_stored = np.append(sigma_stored, fit['sigma'])
 delta_sigma_stored = np.append(delta_sigma_stored, fit['\Delta(sigma)'])
 N = np.append(N, n)
+
+#Plot
+plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
+plt.bar(x_data, y_data, label = 'data', width = x_data[1] - x_data[0], edgecolor="black")                         #original data
+plt.plot(x_data, gaussian(x_data, fit['heigh'], fit['mean'], fit['sigma']), 'r--')           #fit
+plt.title('Gaussian fit of the peak 3', fontsize=22)                      #title
+plt.xlabel("ADC channels", fontsize=14)                                    #xlabel
+plt.ylabel("Counts", fontsize=14)                                    #ylabel
+plt.legend(['gaussian fit', 'data'], fontsize=16) 
+plt.tick_params(axis='both', labelsize=14)                  #size of tick labels  
+plt.grid(True)                                              #show grid
+#plt.xlim(5.35,5.55)                                         #limits of x 
+plt.savefig('gaussian_fit_peak_3.png', format='png')
 
 
 #$$$$$$$$$$$$$$$$$$$N = 4$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -284,15 +297,15 @@ N = np.append(N, n)
 
 #3.1.plot of std, sigma
 
-plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
-plt.errorbar(N, sigma_stored, delta_sigma_stored, fmt='.-b', capsize = 5)
-plt.title('Standar deviation vs peak number', fontsize=22)          #title
-plt.xlabel("Peak number ", fontsize=14)                                    #xlabel
-plt.ylabel(r'$\sigma$', fontsize=14)                                    #ylabel
-plt.tick_params(axis='both', labelsize=14)            #size of tick labels  
-plt.grid(True)                                              #show grid
-#plt.xlim(5.35,5.55) 
-plt.savefig('sigma_vs_peaknumber_py.png', format='png')
+# plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
+# plt.errorbar(N, sigma_stored, delta_sigma_stored, fmt='.-b', capsize = 5)
+# plt.title('Standar deviation vs peak number', fontsize=22)          #title
+# plt.xlabel("Peak number ", fontsize=14)                                    #xlabel
+# plt.ylabel(r'$\sigma$', fontsize=14)                                    #ylabel
+# plt.tick_params(axis='both', labelsize=14)            #size of tick labels  
+# plt.grid(True)                                              #show grid
+# #plt.xlim(5.35,5.55) 
+# plt.savefig('sigma_vs_peaknumber_py.png', format='png')
 
 
 #3.2.plot of variance, sigma^2
@@ -302,15 +315,15 @@ delta_sigma2_stored = sigma_stored*np.sqrt(2) * delta_sigma_stored
     #this is the way to compute sigma*sqrt(2)*delta_sigma
 
 
-plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
-plt.errorbar(N, sigma2_stored, delta_sigma2_stored, fmt='.-b', capsize = 5)
-plt.title('Variance vs peak number', fontsize=22)          #title
-plt.xlabel("Peak number ", fontsize=14)                                    #xlabel
-plt.ylabel(r'$\sigma^2$', fontsize=14)                                    #ylabel
-plt.tick_params(axis='both', labelsize=14)            #size of tick labels  
-plt.grid(True)                                              #show grid
-#plt.xlim(5.35,5.55) 
-plt.savefig('sigma2_vs_peaknumber_py.png', format='png')
+# plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
+# plt.errorbar(N, sigma2_stored, delta_sigma2_stored, fmt='.-b', capsize = 5)
+# plt.title('Variance vs peak number', fontsize=22)          #title
+# plt.xlabel("Peak number ", fontsize=14)                                    #xlabel
+# plt.ylabel(r'$\sigma^2$', fontsize=14)                                    #ylabel
+# plt.tick_params(axis='both', labelsize=14)            #size of tick labels  
+# plt.grid(True)                                              #show grid
+# #plt.xlim(5.35,5.55) 
+# plt.savefig('sigma2_vs_peaknumber_py.png', format='png')
 
 
 # 3.3. Linear fit of both
@@ -329,53 +342,54 @@ ajuste2 = Linear_regression.LinearRegression(N, sigma2_stored)
 
 #Sigma plot with fit
 
-plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
-plt.errorbar(N, sigma_stored, delta_sigma_stored, fmt='.r', capsize = 5)
-plt.plot(N, [linear(a, ajuste['Slope'], ajuste['Intercept']) for a in N])      #fit
+plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
+plt.errorbar(N, sigma_stored, delta_sigma_stored, fmt='ro', capsize = 10)
+plt.plot(N, [linear(a, ajuste['Slope'], ajuste['Intercept']) for a in N], linewidth=3)      #fit
 plt.title('Standard deviation vs peak number', fontsize=22)          #title
 plt.xlabel("Peak number ", fontsize=14)                                    #xlabel
 plt.ylabel(r'$\sigma$', fontsize=14)                                    #ylabel
 plt.tick_params(axis='both', labelsize=14)            #size of tick labels  
 plt.grid(True)                                              #show grid
-plt.legend(['linear fit','data',], fontsize=14)             #legend
-plt.text(4,15, 'y(x) = {0:1.3f}x + {1:1.3f} ; r = {2:1.3f}'
+plt.legend(['linear fit','data',], fontsize=16, loc='upper left')             #legend
+plt.text(6,15, 'y(x) = {0:1.3f}x + {1:1.3f} ; r = {2:1.3f}'
          .format(ajuste['Slope'],ajuste['Intercept'],ajuste['r']), fontsize=14)    #first 2 arguments are x,y position.
     #0:1.3f: 0 is 1st argument in format, 1.3f means float on 3 decimals
-#plt.xlim(5.35,5.55) 
+plt.xlim(0,15)
 plt.savefig('sigma_vs_peaknumber_py.png', format='png')
 
 
 #Sigma2 plot with fit
-plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
-plt.errorbar(N, sigma2_stored, delta_sigma2_stored, fmt='.r', capsize = 5)
-plt.plot(N, [linear(a, ajuste2['Slope'], ajuste2['Intercept']) for a in N])      #fit
+plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
+plt.errorbar(N, sigma2_stored, delta_sigma2_stored, fmt='ro', capsize = 10)
+plt.plot(N, [linear(a, ajuste2['Slope'], ajuste2['Intercept']) for a in N], linewidth=3)      #fit
 
 plt.title('Variance vs peak number', fontsize=22)          #title
 plt.xlabel("Peak number ", fontsize=14)                                    #xlabel
 plt.ylabel(r'$\sigma^2$', fontsize=14)                                    #ylabel
 plt.tick_params(axis='both', labelsize=14)            #size of tick labels  
 plt.grid(True)                                              #show grid
-plt.legend(['linear fit','data',], fontsize=14)             #legend
-plt.text(4.5,200, 'y(x) = {0:1.3f}x + {1:1.3f} ; r = {2:1.2f}'
+plt.legend(['linear fit','data',], fontsize=16, loc='upper left')             #legend
+plt.text(5,100, 'y(x) = {0:1.3f}x + {1:1.3f} ; r = {2:1.2f}'
          .format(ajuste2['Slope'],ajuste2['Intercept'],ajuste2['r']), fontsize=14)
-#plt.xlim(5.35,5.55) 
+plt.xlim(0,15)
 plt.savefig('sigma2_vs_peaknumber_py.png', format='png')
 
 
 #Sigma2 plot with fit, CAENs style
-plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
-plt.errorbar(N, sigma2_stored, delta_sigma2_stored, fmt='.r', capsize = 5)
-plt.plot(N, [linear(a, ajuste2['Slope'], ajuste2['Intercept']) for a in N])      #fit
+plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
+plt.errorbar(N, sigma2_stored, delta_sigma2_stored, fmt='ro', capsize = 10)
+plt.plot(N, [linear(a, ajuste2['Slope'], ajuste2['Intercept']) for a in N], linewidth=3)      #fit
 
 plt.title('Variance vs peak number', fontsize=22)          #title
 plt.xlabel("Peak number ", fontsize=14)                                    #xlabel
 plt.ylabel(r'$\sigma^2$', fontsize=14)                                    #ylabel
 plt.tick_params(axis='both', labelsize=14)            #size of tick labels  
 plt.grid(True)                                              #show grid
-plt.legend(['linear fit','data',], fontsize=14)             #legend
-plt.text(1,3000, 'y(x) = {0:1.3f}x + {1:1.3f} ; r = {2:1.2f}'
+plt.legend(['linear fit','data',], fontsize=16, loc='upper left')             #legend
+plt.text(5,200, 'y(x) = {0:1.3f}x + {1:1.3f} ; r = {2:1.2f}'
          .format(ajuste2['Slope'],ajuste2['Intercept'],ajuste2['r']), fontsize=14) #10 default size)
 plt.ylim(0,7000) 
+plt.xlim(0,15)
 plt.savefig('sigma2_vs_peaknumber_CAENs_style_py.png', format='png')
 
 
@@ -438,18 +452,19 @@ r_cuadratic_fit = r_square(N, sigma2_stored, 2)
 #{'r_squared': 0.9092114182131691}
 
 #plot
-plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
-plt.errorbar(N, sigma2_stored, delta_sigma2_stored, fmt='.r', capsize = 5)
-plt.plot(N, [cuadratic(x, a, b, c) for x in N])      #fit
+plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
+plt.errorbar(N, sigma2_stored, delta_sigma2_stored, fmt='ro', capsize = 10)
+plt.plot(N, [cuadratic(x, a, b, c) for x in N], linewidth=3)      #fit
 
 plt.title('Variance vs peak number', fontsize=22)          #title
 plt.xlabel("Peak number ", fontsize=14)                                    #xlabel
 plt.ylabel(r'$\sigma^2$', fontsize=14)                                    #ylabel
 plt.tick_params(axis='both', labelsize=14)            #size of tick labels  
 plt.grid(True)                                              #show grid
-plt.legend(['quadratic fit','data',], fontsize=14)             #legend
-plt.text(2.4,150, 'y(x) = {0:1.3f}x^2 + {1:1.3f}x + {2:1.3f} ; r = {3:1.3f}'
+plt.legend(['quadratic fit','data',], fontsize=16, loc='upper left')             #legend
+plt.text(2.7,300, 'y(x) = {0:1.3f}x^2 + {1:1.3f}x + {2:1.3f} ; r = {3:1.3f}'
          .format(a, b, c,r_cuadratic_fit), fontsize=14) #10 default size
+plt.xlim(0,15)
 plt.savefig('sigma2_vs_peaknumber_cuadratic_fit_py.png', format='png')
 
 
