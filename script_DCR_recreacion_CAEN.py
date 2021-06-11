@@ -119,7 +119,7 @@ thresholds = np.array( [1, 11, 21, 31, 41, 51, 61] )        #[mV] thresholds val
 
 #########3) Representacion######3
 
-plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
+plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
 plt.bar(thresholds,total_count_rate, width = thresholds[1]-thresholds[0], edgecolor="black")
 
 # Set chart title and label axes.
