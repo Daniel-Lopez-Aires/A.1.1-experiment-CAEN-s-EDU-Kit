@@ -5,9 +5,7 @@ Created on Tue Feb  2 10:28:13 2021
 
 @author: dla
 
-
-SCRIPT PRACTICA ALFA MASTER, PASADO DE MATLAB A PYTHON
-y
+NEW VERION, WITH THE NEW DATA, FROM 26_4_21
 """
 
 #reset to manually clear all the variables
@@ -38,7 +36,7 @@ plt.close("all")
 
 total_counts = []       #variable that will contain the total counts of all the
                         #spectras
-with open('0_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
+with open('0_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 0 amp file is',len(lines))
@@ -51,7 +49,7 @@ with open('0_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
        
         total_counts.append(sum(counts_0ampl))  #total counts of the spectra     
         
-with open('1_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
+with open('1_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 1ampl file is',len(lines))
@@ -64,7 +62,7 @@ with open('1_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
         
         total_counts.append(sum(counts_1ampl))  #total counts of the spectra  
         
-with open('2_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:    #file_object stores
+with open('2_ampl_new_histo.txt') as file_object:    #file_object stores
             # the object representing the file (pi.txt), which is opened with
             #the open function
             
@@ -83,7 +81,7 @@ with open('2_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
         
         total_counts.append(sum(counts_2ampl))  #total counts of the spectra  
                          
-with open('3_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
+with open('3_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 3ampl file is',len(lines))
@@ -96,7 +94,7 @@ with open('3_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
         
         total_counts.append(sum(counts_3ampl))  #total counts of the spectra  
                        
-with open('4_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
+with open('4_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 400mV file is',len(lines))
@@ -109,7 +107,7 @@ with open('4_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
         
         total_counts.append(sum(counts_4ampl))  #total counts of the spectra  
         
-with open('5_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
+with open('5_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 5ampl file is',len(lines))
@@ -122,7 +120,7 @@ with open('5_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
         
         total_counts.append(sum(counts_5ampl))  #total counts of the spectra  
         
-with open('6_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
+with open('6_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 6ampl file is',len(lines))
@@ -135,7 +133,10 @@ with open('6_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
         
         total_counts.append(sum(counts_6ampl))  #total counts of the spectra  
         
-with open('7_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
+        #some lines in the .txt deleted because it had more than 3k lines, at the
+        #end several lines were repeated, so were erased
+        
+with open('7_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 7ampl file is',len(lines))
@@ -148,7 +149,7 @@ with open('7_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
         
         total_counts.append(sum(counts_7ampl))  #total counts of the spectra  
         
-with open('8_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
+with open('8_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 8ampl file is',len(lines))
@@ -163,7 +164,7 @@ with open('8_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
 
 #Files with 9 and 10 deleted because they excess the range of the spectra!!!
         
-with open('9_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
+with open('9_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 9ampl file is',len(lines))
@@ -176,7 +177,7 @@ with open('9_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_obje
         
         total_counts.append(sum(counts_9ampl))  #total counts of the spectra  
         
-with open('10_ampl_60s_800mV_new_histo.txt') as file_object:
+with open('10_ampl_new_histo.txt') as file_object:
             
         lines = file_object.readlines()
         print('the number of lines of the 10ampl file is',len(lines))
@@ -193,10 +194,10 @@ with open('10_ampl_60s_800mV_new_histo.txt') as file_object:
             
 
 
-        
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default      
 plt.bar(ADC_channel_0ampl,counts_0ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])     
         #widht so that each bar touches each other!
-plt.title("Dark counts rate vs Threshold 0 amp", fontsize=24)           #title
+plt.title("Histogram with amplitude 0 of the LED driver", fontsize=24)           #title
 plt.xlabel("ADC channels", fontsize=14)                        #xlabel
 plt.ylabel("Counts", fontsize=14)              #ylabel
 # Set size of tick labels.
@@ -204,10 +205,13 @@ plt.tick_params(axis='both', labelsize=14)              #size of axis
 plt.grid(True) 
 #plt.xlim(0,800)                       #limits of x axis
 #plt.ylim(0,11000)                            #limits of y axis
+plt.savefig('Spectra_LedDriver_0_ampl.png', format='png')
+
 
 #
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
 plt.bar(ADC_channel_1ampl,counts_1ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])     
-plt.title("Dark counts rate vs Threshold 1 amp", fontsize=24)           #title
+plt.title("Histogram with amplitude 1 of the LED driver", fontsize=24)           #title
 plt.xlabel("ADC channels", fontsize=14)                        #xlabel
 plt.ylabel("Counts", fontsize=14)              #ylabel
 # Set size of tick labels.
@@ -217,39 +221,9 @@ plt.grid(True)
 #plt.ylim(0,11000)                            #limits of y axis
 
 #
-#
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
 plt.bar(ADC_channel_2ampl,counts_2ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])        
-plt.title("Dark counts rate vs Threshold 2 amp", fontsize=24)           #title
-plt.xlabel("ADC channels", fontsize=14)                        #xlabel
-plt.ylabel("Counts", fontsize=14)              #ylabel
-# Set size of tick labels.
-plt.tick_params(axis='both', labelsize=14)              #size of axis
-plt.grid(True) 
-#plt.xlim(0,800)                       #limits of x axis
-#plt.ylim(0,11000)                            #limits of y axis
-#
-plt.bar(ADC_channel_3ampl,counts_3ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])          
-plt.title("Dark counts rate vs Threshold 3 amp", fontsize=24)           #title
-plt.xlabel("ADC channels", fontsize=14)                        #xlabel
-plt.ylabel("Counts", fontsize=14)              #ylabel
-# Set size of tick labels.
-plt.tick_params(axis='both', labelsize=14)              #size of axis
-plt.grid(True) 
-#plt.xlim(0,800)                       #limits of x axis
-#plt.ylim(0,11000)                            #limits of y axis
-#
-plt.bar(ADC_channel_4ampl,counts_4ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])         
-plt.title("Dark counts rate vs Threshold 4 amp", fontsize=24)           #title
-plt.xlabel("ADC channels", fontsize=14)                        #xlabel
-plt.ylabel("Counts", fontsize=14)              #ylabel
-# Set size of tick labels.
-plt.tick_params(axis='both', labelsize=14)              #size of axis
-plt.grid(True) 
-#plt.xlim(0,800)                       #limits of x axis
-#plt.ylim(0,11000)                            #limits of y axis
-#
-plt.bar(ADC_channel_5ampl,counts_5ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])     
-plt.title("Dark counts rate vs Threshold 5 amp", fontsize=24)           #title
+plt.title("Histogram with amplitude 2 of the LED driver", fontsize=24)           #title
 plt.xlabel("ADC channels", fontsize=14)                        #xlabel
 plt.ylabel("Counts", fontsize=14)              #ylabel
 # Set size of tick labels.
@@ -259,9 +233,46 @@ plt.grid(True)
 #plt.ylim(0,11000)                            #limits of y axis
 
 #
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
+plt.bar(ADC_channel_3ampl,counts_3ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])          
+plt.title("Histogram with amplitude 3 of the LED driver", fontsize=24)           #title
+plt.xlabel("ADC channels", fontsize=14)                        #xlabel
+plt.ylabel("Counts", fontsize=14)              #ylabel
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True) 
+#plt.xlim(0,800)                       #limits of x axis
+#plt.ylim(0,11000)                            #limits of y axis
+
 #
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
+plt.bar(ADC_channel_4ampl,counts_4ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])         
+plt.title("Histogram with amplitude 4 of the LED driver", fontsize=24)           #title
+plt.xlabel("ADC channels", fontsize=14)                        #xlabel
+plt.ylabel("Counts", fontsize=14)              #ylabel
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True) 
+#plt.xlim(0,800)                       #limits of x axis
+#plt.ylim(0,11000)                            #limits of y axis
+
+#
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
+plt.bar(ADC_channel_5ampl,counts_5ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])     
+plt.title("Histogram with amplitude 5 of the LED driver", fontsize=24)           #title
+plt.xlabel("ADC channels", fontsize=14)                        #xlabel
+plt.ylabel("Counts", fontsize=14)              #ylabel
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True) 
+#plt.xlim(0,800)                       #limits of x axis
+#plt.ylim(0,11000)                            #limits of y axis
+
+
+#
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
 plt.bar(ADC_channel_6ampl,counts_6ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])        
-plt.title("Dark counts rate vs Threshold 6 amp", fontsize=24)           #title
+plt.title("Histogram with amplitude 6 of the LED driver", fontsize=24)           #title
 plt.xlabel("ADC channels", fontsize=14)                        #xlabel
 plt.ylabel("Counts", fontsize=14)              #ylabel
 # Set size of tick labels.
@@ -269,9 +280,12 @@ plt.tick_params(axis='both', labelsize=14)              #size of axis
 plt.grid(True) 
 #plt.xlim(0,800)                       #limits of x axis
 #plt.ylim(0,11000)                            #limits of y axis
+#plt.savefig('Spectra_LedDriver_0_ampl.png', format='png')
+
 #
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
 plt.bar(ADC_channel_7ampl,counts_7ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])        
-plt.title("Dark counts rate vs Threshold 7 amp", fontsize=24)           #title
+plt.title("Histogram with amplitude 7 of the LED driver", fontsize=24)           #title
 plt.xlabel("ADC channels", fontsize=14)                        #xlabel
 plt.ylabel("Counts", fontsize=14)              #ylabel
 # Set size of tick labels.
@@ -279,9 +293,11 @@ plt.tick_params(axis='both', labelsize=14)              #size of axis
 plt.grid(True) 
 #plt.xlim(0,800)                       #limits of x axis
 #plt.ylim(0,11000)                            #limits of y axis
+
 #
+plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
 plt.bar(ADC_channel_8ampl,counts_8ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])        
-plt.title("Dark counts rate vs Threshold 8 amp", fontsize=24)           #title
+plt.title("Histogram with amplitude 8 of the LED driver", fontsize=24)           #title
 plt.xlabel("ADC channels", fontsize=14)                        #xlabel
 plt.ylabel("Counts", fontsize=14)              #ylabel
 # Set size of tick labels.
@@ -294,32 +310,34 @@ plt.grid(True)
 
 
 #############2) Calcs##########################
-Amplitude =  [x for x in range(8+1)] #since I only use from 0 to 8
+Amplitude =  [x for x in range(10+1)] 
 Amplitude_min =  [x for x in range(7+1)] #since I only use from 0 to 7
 
 #I need to count the number of peaks. How can I do that??????????????????????
 
 #for the moment, will do it by hand:
     
-number_peaks = [3, 3, 3, 4, 5, 8, 16, 25] #from the screenshots, counts from 0 to 10 turns
+number_peaks = [2, 2, 2, 3, 4, 7, 14, 25] #from the screenshots, counts from 0 to 10 turns
                 #0,1,2,3,4,5,6,7(dudoso, podria contar 2 mas),              #wheel turns
 #el 8 ya es un continuo practicamente
 #el 9 es raro, pq está pegado al maximo
 #el 10 no se ve, pasará del maximo de carga
+
+#[3, 3, 3, 4, 5, 8, 16, 25] #values of the old version, to compare
 
 #%%
 
 
 #############3) Plot################3
 
-plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
+plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
 plt.bar(Amplitude_min, number_peaks, width = Amplitude[1]-Amplitude[0], edgecolor="black")
         #edgecolor is the color of the borders of the bars.        
-plt.title("Peak number vs Amplitude of the Led Driver", fontsize=20)           #title
-plt.xlabel("Amplitude (wheel) of the Led Driver", fontsize=10)                        #xlabel
-plt.ylabel("Peak number", fontsize=10)              #ylabel
+plt.title("Peak number vs Amplitude of the LED driver", fontsize=22)           #title
+plt.xlabel("Amplitude of the LED driver", fontsize=14)                        #xlabel
+plt.ylabel("Peak number", fontsize=14)              #ylabel
 # Set size of tick labels.
-plt.tick_params(axis='both', labelsize=10)              #size of axis
+plt.tick_params(axis='both', labelsize=14)              #size of axis
 plt.grid(True) 
 #plt.xlim(0,800)                       #limits of x axis
 #plt.ylim(0,11000)                            #limits of y axis
@@ -345,13 +363,12 @@ plt.savefig('Number_of_peaks_vs_LedDriver_amplitude.png', format='png')
 
 #Marcos also want this, so lets do it!
 
-Amplitude_full = [x for x in range(10+1)] #since I only use from 0 to 9
 
 plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
-plt.bar(Amplitude_full, total_counts, width = Amplitude[1]-Amplitude[0], edgecolor="black")
+plt.bar(Amplitude, total_counts, width = Amplitude[1]-Amplitude[0], edgecolor="black")
         #edgecolor is the color of the borders of the bars.        
-plt.title("Total counts vs Amplitude of the Led Driver", fontsize=20)           #title
-plt.xlabel("Amplitude (wheel) of the Led Driver", fontsize=10)                        #xlabel
+plt.title("Total counts vs Amplitude of the LED driver", fontsize=20)           #title
+plt.xlabel("Amplitude of the LED driver", fontsize=10)                        #xlabel
 plt.ylabel("Counts", fontsize=10)              #ylabel
 # Set size of tick labels.
 plt.tick_params(axis='both', labelsize=10)              #size of axis
@@ -363,22 +380,78 @@ plt.savefig('Tota_counts_vs_LedDriver_amplitude.png', format='png')
 
 #The numbers of total counts read in the software is (by the screeenshots)
 
-total_counts_software = [217224, 235704, 239650, 215628, 199892, 191212, 288652,
-                        172452, 91252, 341012 , 308868]  #from the software
-                        #0,1,2,3,4,5,6
-                        #7,8,9,10
+total_counts_software = [283948, 283668, 307468, 274148, 298508, 309428, 
+                         318108, 200788, 199108, 199668, 283388]  #from the software
+                        #0,1,2,3,4,5,
+                        #6, 7,8,9,10
+                        
+#total_counts_software = [217224, 235704, 239650, 215628, 199892, 191212, 288652,
+#                        172452, 91252, 341012 , 308868]  #from the software
+#from the old version!!
+                
                 #slightly different from the one computed w\ python, differences
                 #around 7 counts, very little!!
                 
 plt.figure(figsize=(8,5))  #width, heigh 6.4*4.8 inches by default
-plt.bar(Amplitude_full, total_counts_software, width = Amplitude[1]-Amplitude[0], edgecolor="black")
+plt.bar(Amplitude, total_counts_software, width = Amplitude[1]-Amplitude[0], edgecolor="black")
         #edgecolor is the color of the borders of the bars.        
-plt.title("Total counts (edu_kit) vs Amplitude of the Led Driver", fontsize=20)           #title
-plt.xlabel("Amplitude (wheel) of the Led Driver", fontsize=10)                        #xlabel
+plt.title("Total counts (SiPM_kit) vs Amplitude of the LED driver", fontsize=20)           #title
+plt.xlabel("Amplitude (wheel) of the LED driver", fontsize=10)                        #xlabel
 plt.ylabel("Counts", fontsize=10)              #ylabel
 # Set size of tick labels.
 plt.tick_params(axis='both', labelsize=10)              #size of axis
 plt.grid(True) 
 #plt.xlim(0,800)                       #limits of x axis
 #plt.ylim(0,11000)                            #limits of y axis
-plt.savefig('Tota_counts_software_vs_LedDriver_amplitude.png', format='png')                
+plt.savefig('Tota_counts_software_vs_LedDriver_amplitude.png', format='png')    
+
+
+
+
+#%% Plot to see the mshift of the spectra to the right
+
+plt.figure(figsize=(13,12))  #width, heigh 6.4*4.8 inches by default
+plt.suptitle("Spectra of the LED driver varying its amplitude", fontsize=22, wrap=True)           #title
+
+plt.subplot(2, 2, 1)
+plt.bar(ADC_channel_5ampl,counts_5ampl, width = ADC_channel_5ampl[1]-ADC_channel_5ampl[0])        
+plt.title("Amplitude = 5", fontsize=18)           #title
+plt.xlabel("ADC channels", fontsize=14)                        #xlabel
+plt.ylabel("Counts", fontsize=14)              #ylabel
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True) 
+plt.xlim(min(ADC_channel_8ampl),3000)                       #limits of x axis
+
+plt.subplot(2, 2, 2)
+plt.bar(ADC_channel_6ampl,counts_6ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])        
+plt.title("Amplitude = 6", fontsize=18)           #title
+plt.xlabel("ADC channels", fontsize=14)                        #xlabel
+plt.ylabel("Counts", fontsize=14)              #ylabel
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True)  
+plt.xlim(min(ADC_channel_8ampl),5000)                       #limits of x axis
+
+plt.subplot(2, 2, 3)
+plt.bar(ADC_channel_7ampl,counts_7ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])        
+plt.title("Amplitude = 7", fontsize=18)           #title
+plt.xlabel("ADC channels", fontsize=14)                        #xlabel
+plt.ylabel("Counts", fontsize=14)              #ylabel
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True)  
+plt.xlim(0,12500)                       #limits of x axis
+
+plt.subplot(2, 2, 4)
+plt.bar(ADC_channel_8ampl,counts_8ampl, width = ADC_channel_0ampl[1]-ADC_channel_0ampl[0])        
+plt.title("Amplitude = 8", fontsize=18)           #title
+plt.xlabel("ADC channels", fontsize=14)                        #xlabel
+plt.ylabel("Counts", fontsize=14)              #ylabel
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True) 
+plt.xlim(5000,max(ADC_channel_8ampl))                       #limits of x axis
+
+plt.savefig('Spectra_shift_with_amplitude_LedDriver.png', format='png')
+            
