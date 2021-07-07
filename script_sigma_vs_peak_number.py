@@ -24,35 +24,46 @@ import numpy as np
     #np contain linspaces as np.linspace(a,b,N)
 
 import sys                   #to import functions from other folders!!
-sys.path.insert(0, '/home/dla/Python/Functions_homemade')   #path where I have the functions
+sys.path.insert(0, '/home/dla/Python/Functions_homemade')   
+            #path where I have the functions
 
-import Gaussian_fit
-import Linear_regression
-import Quadratic_regression
+import Fits
+import pandas as pd
 
 ######3
 
 #%%
 #########################1), Data loading #####################3
 
-
-with open('6_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
-            
-        lines = file_object.readlines()
-        print('the number of lines of the 6ampl file is',len(lines))
+data  =pd.read_csv('6_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt', 
+                    sep = '	',names = ['ADC_ch', 'counts'])
+        #due to the CAEN's s, the sepparator is strange. If you type ' ', it does
+        #not work properly. But if you copy the space in the .txt and paste it here,
+        #now it works. That is why below I have kept the other version to read this,
+        #just in case :)
         
-        ADC_channel_6ampl = []
-        counts_6ampl = []
-        for i in range(len(lines)):            
-            ADC_channel_6ampl.append(float(lines[i].split()[0])) 
-            counts_6ampl.append(float(lines[i].split()[1]))
+        
+        
+############Version to read it without pandas########
+# with open('6_amplitude_60s_800mV_Bias_gain_gate_standar_histo.txt') as file_object:
             
+#         lines = file_object.readlines()
+#         print('the number of lines of the 6ampl file is',len(lines))
+        
+#         ADC_channel_6ampl = []
+#         counts_6ampl = []
+#         for i in range(len(lines)):            
+#             ADC_channel_6ampl.append(float(lines[i].split()[0])) 
+#             counts_6ampl.append(float(lines[i].split()[1]))
+#####################
+
+
 #%%    0.1. Representacion
             
 
         
 plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
-plt.bar(ADC_channel_6ampl,counts_6ampl, width = ADC_channel_6ampl[1]-ADC_channel_6ampl[0])        
+plt.bar(data['ADC_ch'],data['counts'], width = data['ADC_ch'][1]-data['ADC_ch'][0])        
 plt.title("Spectrum of the LED driver with amplitude 6", fontsize=22)           #title
 plt.xlabel("ADC channels", fontsize=14)                        #xlabel
 plt.ylabel("Counts", fontsize=14)              #ylabel
@@ -106,11 +117,11 @@ n = 1      #peak index
 
 #Creation of the array needed to do the fit
 
-x_data = np.array(ADC_channel_6ampl[122-1:130-1])       #-1 because python starts at 0
+x_data = np.array(data['ADC_ch'][122-1:130-1])       #-1 because python starts at 0
                 #and the indexes were found at the .txt reader, that starts in line 1      
-y_data = np.array(counts_6ampl[122-1:130-1])
+y_data = np.array(data['counts'][122-1:130-1])
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -128,10 +139,10 @@ N = np.append(N, n)
 n = n +1 #peak index
 
 #Creation of the array needed to do the fit
-x_data = np.array(ADC_channel_6ampl[158-1:168-1])   
-y_data = np.array(counts_6ampl[158-1:168-1])
+x_data = np.array(data['ADC_ch'][158-1:168-1])   
+y_data = np.array(data['counts'][158-1:168-1])
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -145,10 +156,10 @@ N = np.append(N, n)
 n = n +1 #peak index
 
 #Creation of the array needed to do the fit
-x_data = np.array(ADC_channel_6ampl[192-1:207-1])   
-y_data = np.array(counts_6ampl[192-1:207-1])
+x_data = np.array(data['ADC_ch'][192-1:207-1])   
+y_data = np.array(data['counts'][192-1:207-1])
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -175,10 +186,10 @@ plt.savefig('gaussian_fit_peak_3.png', format='png')
 n = n +1 #peak index
 
 #Creation of the array needed to do the fit
-x_data = np.array(ADC_channel_6ampl[225-1:243-1])   
-y_data = np.array(counts_6ampl[225-1:243-1])  
+x_data = np.array(data['ADC_ch'][225-1:243-1])   
+y_data = np.array(data['counts'][225-1:243-1])  
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -192,10 +203,10 @@ N = np.append(N, n)
 n = n +1 #peak index
 
 #Creation of the array needed to do the fit
-x_data = np.array(ADC_channel_6ampl[263-1:282-1])   
-y_data = np.array(counts_6ampl[263-1:282-1]) 
+x_data = np.array(data['ADC_ch'][263-1:282-1])   
+y_data = np.array(data['counts'][263-1:282-1]) 
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -208,10 +219,10 @@ N = np.append(N, n)
 n = n +1 #peak index
 
 #Creation of the array needed to do the fit
-x_data = np.array(ADC_channel_6ampl[299-1:319-1])   
-y_data = np.array(counts_6ampl[299-1:319-1]) 
+x_data = np.array(data['ADC_ch'][299-1:319-1])   
+y_data = np.array(data['counts'][299-1:319-1]) 
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -224,10 +235,10 @@ N = np.append(N, n)
 n = n +1 #peak index
 
 #Creation of the array needed to do the fit
-x_data = np.array(ADC_channel_6ampl[335-1:356-1])   
-y_data = np.array(counts_6ampl[335-1:356-1])   
+x_data = np.array(data['ADC_ch'][335-1:356-1])   
+y_data = np.array(data['counts'][335-1:356-1])   
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -241,11 +252,11 @@ N = np.append(N, n)
 n = n +1 #peak index
 
 #Creation of the array needed to do the fit
-x_data = np.array(ADC_channel_6ampl[371-1:388-1])   
-y_data = np.array(counts_6ampl[371-1:388-1])   
+x_data = np.array(data['ADC_ch'][371-1:388-1])   
+y_data = np.array(data['counts'][371-1:388-1])   
 
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -259,10 +270,10 @@ N = np.append(N, n)
 n = n +1 #peak index
 
 #Creation of the array needed to do the fit
-x_data = np.array(ADC_channel_6ampl[407-1:423-1])   
-y_data = np.array(counts_6ampl[407-1:423-1])   
+x_data = np.array(data['ADC_ch'][407-1:423-1])   
+y_data = np.array(data['counts'][407-1:423-1])   
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -277,10 +288,10 @@ N = np.append(N, n)
 n = n +1 #peak index
 
 #Creation of the array needed to do the fit
-x_data = np.array(ADC_channel_6ampl[444-1:458-1])   
-y_data = np.array(counts_6ampl[444-1:458-1]) 
+x_data = np.array(data['ADC_ch'][444-1:458-1])   
+y_data = np.array(data['counts'][444-1:458-1]) 
 
-fit = Gaussian_fit.Gaussian_fit(x_data,y_data)                      #fit
+fit = Fits.Gaussian_fit(x_data,y_data)                      #fit
 
 
 #Storing of the relevant data, sigma and its error
@@ -336,10 +347,10 @@ def linear(x, m, n):       #Definition of the function to use to fit the data
     return m * x + n 
 
 
-ajuste = Linear_regression.LinearRegression(N, sigma_stored)
+ajuste = Fits.LinearRegression(N, sigma_stored)
             #the results are the same as in my script, so awesome
             
-ajuste2 = Linear_regression.LinearRegression(N, sigma2_stored)            
+ajuste2 = Fits.LinearRegression(N, sigma2_stored)            
 
 #Sigma plot with fit
 
@@ -407,56 +418,16 @@ plt.savefig('sigma2_vs_peaknumber_CAENs_style_py.png', format='png')
 x_data = np.array(N)   
 y_data = np.array(sigma2_stored) 
 
-Quadratic_regression.QuadraticRegression(x_data, y_data)
+quad_fit = Fits.QuadraticRegression(x_data, y_data)
 
 def cuadratic(x, a, b, c):       #Definition of the function to use to fit the data
     return a * x**2 + b*x + c 
 
 
-#initial = [max(y_data), x_data[0], (x_data[1] - x_data[0]) * 5]
-                #initial guesses for the fit. If None, this does not work, so this
-                #is very important when having an offset! Thank you 
-                #Lucas Hermann Negri (PeakUtils)
-                
-cuadratic_fit = scipy.optimize.curve_fit(cuadratic, x_data, y_data)#, initial)
-                
-
-opt_values = cuadratic_fit[0]   #optimal values of the function to fit the data
-cov_of_opt_val = cuadratic_fit[1]            #covariances of the optimal values
-    #the diagonal are the variance of the parameter to estimate.
-    
-a = opt_values[0]  
-b = opt_values[1]
-c = opt_values[2]
-#offset =  opt_values[3]
-        #similar values as the ones given by the fit function in Matlab :)
-
-perr = np.sqrt(np.diag(cov_of_opt_val))        #standard deviation error (el 
-                                                #error de toa la via vamos)
-
-#define function to calculate r-squared (https://www.statology.org/quadratic-regression-python/)
-def r_square(x, y, degree):
-    coeffs = np.polyfit(x, y, degree)
-    p = np.poly1d(coeffs)
-    
-    #calculate r-squared
-    yhat = p(x)
-    ybar = np.sum(y)/len(y)
-    ssreg = np.sum((yhat-ybar)**2)
-    sstot = np.sum((y - ybar)**2)
-    results = ssreg / sstot
-
-    return results
-
-#find r-squared of polynomial model with degree = 3
-r_cuadratic_fit = r_square(N, sigma2_stored, 2)
-
-#{'r_squared': 0.9092114182131691}
-
 #plot
 plt.figure(figsize=(10,6))  #width, heigh 6.4*4.8 inches by default
 plt.errorbar(N, sigma2_stored, delta_sigma2_stored, fmt='ro', capsize = 10)
-plt.plot(N, [cuadratic(x, a, b, c) for x in N], linewidth=3)      #fit
+plt.plot(N, [cuadratic(x, quad_fit['a'], quad_fit['b'], quad_fit['c']) for x in N], linewidth=3)      #fit
 
 plt.title('Variance vs peak number', fontsize=22)          #title
 plt.xlabel("Peak number ", fontsize=14)                                    #xlabel
@@ -465,7 +436,7 @@ plt.tick_params(axis='both', labelsize=14)            #size of tick labels
 plt.grid(True)                                              #show grid
 plt.legend(['quadratic fit','data',], fontsize=16, loc='upper left')             #legend
 plt.text(2.7,300, 'y(x) = {0:1.3f}x^2 + {1:1.3f}x + {2:1.3f} ; r = {3:1.3f}'
-         .format(a, b, c,r_cuadratic_fit), fontsize=14) #10 default size
+         .format(quad_fit['a'], quad_fit['b'], quad_fit['c'], quad_fit['r']), fontsize=14) #10 default size
 plt.xlim(0,15)
 plt.savefig('sigma2_vs_peaknumber_cuadratic_fit_py.png', format='png')
 
