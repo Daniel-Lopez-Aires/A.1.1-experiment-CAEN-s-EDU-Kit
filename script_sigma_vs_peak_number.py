@@ -28,6 +28,7 @@ sys.path.insert(0, '/home/dla/Python/Functions_homemade')   #path where I have t
 
 import Gaussian_fit
 import Linear_regression
+import Quadratic_regression
 
 ######3
 
@@ -406,6 +407,7 @@ plt.savefig('sigma2_vs_peaknumber_CAENs_style_py.png', format='png')
 x_data = np.array(N)   
 y_data = np.array(sigma2_stored) 
 
+Quadratic_regression.QuadraticRegression(x_data, y_data)
 
 def cuadratic(x, a, b, c):       #Definition of the function to use to fit the data
     return a * x**2 + b*x + c 
